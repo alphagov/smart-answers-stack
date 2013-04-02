@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -a /etc/apache2/other/dev.gov.uk.conf ]; then
+  echo "Apache config for dev.gov.uk already present, skipping"
+else
+  echo "Copying Apache config to /etc/apache2/other/dev.gov.uk.conf, administrator access will be required."
+  sudo cp src/dev.gov.uk.conf /etc/apache2/other/dev.gov.uk.conf
+fi
+
+if grep --quiet dev.gov.uk /private/etc/hosts; then
+  echo "Host entries for dev.gov.uk already present, skipping"
+else
+  cat src/hosts | sudo tee -a /private/etc/hosts
+fi
+
+echo "Reloading apache"
+sudo apachectl restart

@@ -1,0 +1,8 @@
+
+# BEGIN dev.gov.uk entries
+
+127.0.0.1 smartanswers.dev.gov.uk
+127.0.0.1 static.dev.gov.uk
+127.0.0.1 contentapi.dev.gov.uk
+
+# END dev.gov.uk entries
