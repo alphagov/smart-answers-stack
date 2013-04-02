@@ -13,10 +13,12 @@ These scripts make several assumptions:
 
 1. Clone [smart answers](https://github.com/alphagov/smart-answers), [content api](https://github.com/alphagov/govuk_content_api) and [static](https://github.com/alphagov/static) to the directory above this repo.
 
-    cd ../
-    git clone https://github.com/alphagov/smart-answers.git
-    git clone https://github.com/alphagov/govuk_content_api.git
-    git clone https://github.com/alphagov/static.git
+```
+cd ../
+git clone https://github.com/alphagov/smart-answers.git
+git clone https://github.com/alphagov/govuk_content_api.git
+git clone https://github.com/alphagov/static.git
+```
 
 2. Run `bundle install` inside each repo.
 
