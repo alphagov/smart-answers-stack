@@ -4,14 +4,14 @@ set -e
 
 cd "$(dirname "$0")"
 
-if [ -d $(dirname $0)/smart-answers ]; then
+if [ -d smart-answers ]; then
   echo "smart-answers repo already exists, skipping checkout."
 else
   echo "Checking out alphagov/smart-answers..."
   git clone https://github.com/alphagov/smart-answers.git
 fi
 
-if [ -d $(dirname $0)/static ]; then
+if [ -d static ]; then
   echo "static repo already exists, skipping checkout."
 else
   echo "Checking out alphagov/static..."
