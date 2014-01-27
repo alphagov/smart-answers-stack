@@ -1,17 +1,32 @@
 #!/bin/bash
 
-if [ -a /etc/apache2/other/dev.gov.uk.conf ]; then
-  echo "Apache config for dev.gov.uk already present, skipping"
+set -e
+
+cd "$(dirname "$0")"
+
+if [ -d $(dirname $0)/smart-answers ]; then
+  echo "smart-answers repo already exists, skipping checkout."
 else
-  echo "Copying Apache config to /etc/apache2/other/dev.gov.uk.conf, administrator access will be required."
-  sudo cp src/dev.gov.uk.conf /etc/apache2/other/dev.gov.uk.conf
+  echo "Checking out alphagov/smart-answers..."
+  git clone https://github.com/alphagov/smart-answers.git
 fi
 
-if grep --quiet dev.gov.uk /private/etc/hosts; then
-  echo "Host entries for dev.gov.uk already present, skipping"
+if [ -d $(dirname $0)/static ]; then
+  echo "static repo already exists, skipping checkout."
 else
-  cat src/hosts | sudo tee -a /private/etc/hosts
+  echo "Checking out alphagov/static..."
+  git clone https://github.com/alphagov/static.git
 fi
 
-echo "Reloading apache"
-sudo apachectl restart
+if ! gem list foreman -i > /dev/null; then
+  echo "Installing foreman..."
+  gem install foreman
+else
+  echo "Foreman is already installed."
+fi
+
+echo "Running Bundler..."
+(cd smart-answers/ && bundle install --quiet)
+(cd static/ && bundle install --quiet)
+
+echo "Setup complete. Run 'foreman start' to begin."

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd $1
-export STATIC_DEV="http://static.dev.gov.uk/"
-export GOVUK_APP_DOMAIN="dev.gov.uk"
+export PLEK_SERVICE_STATIC_URI=http://localhost:5000
 shift
 exec "$@"
